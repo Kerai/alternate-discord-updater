@@ -24,8 +24,12 @@ public class UpdateChecker {
 		window.progressBar.setIndeterminate(true);
 		
 		
-		File icon = new File("app.ico");
+		String env = System.getenv("LOCALAPPDATA");
+		
+		File localappdata = new File(env);
+		File icon = new File(localappdata, "Discord/app.ico");
 		if(!icon.exists()) {
+			icon.getParentFile().mkdirs();
 			try(InputStream in = UpdateChecker.class.getResourceAsStream("/icon.ico"); OutputStream out = new FileOutputStream(icon);)
 			{
 				Utils.pipe(in, out);
