@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="exe" name="Alternate Discord Updater">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+	<property file="ant.properties"/>
+    <property name="dir.buildfile" value="./build/"/>
+    <property name="dir.jarfile" value="${dir.buildfile}/DiscordAlt.jar"/>
+    <property name="dir.exefile" value="${dir.buildfile}/DiscordAlt.exe"/>
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}" filesetmanifest="mergewithoutmain" compress="true" level="9">
+            <manifest>
+                <attribute name="Main-Class" value="DiscordMain"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="./bin"/>
+        </jar>
+    </target>
+	
+	<target name="exe" depends="create_run_jar">
+		<taskdef name="launch4j"
+		    classname="net.sf.launch4j.ant.Launch4jTask"
+		    classpath="${launch4j.path}/launch4j.jar:${launch4j.path}/lib/xstream.jar" />
+		<launch4j configFile="launch4j.xml" jar="${dir.jarfile}" outfile="${dir.exefile}"/>
+	</target>
+</project>
