@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <errTitle></errTitle>
+  <cmdLine>-log</cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <icon>res/icon.ico</icon>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.11.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+    <opt>-Dfile.encoding=UTF-8</opt>
+	<opt>-Dlaunch4j.exedir="%EXEDIR%"</opt>
+	<opt>-Dlaunch4j.exefile="%EXEFILE%"</opt>
+    <opt>-Xverify:none</opt>
+    <opt>-Xms8M</opt>
+    <opt>-Xmx32M</opt>
+    <opt>-XX:MaxHeapFreeRatio=10</opt>
+    <opt>-XX:MinHeapFreeRatio=5</opt>
+    <opt>-XX:MaxMetaspaceSize=64M</opt>
+    <opt>-XX:TieredStopAtLevel=1</opt>
+    <opt>-XX:CICompilerCount=1</opt>
+    <opt>-XX:ConcGCThreads=1</opt>
+  </jre>
+</launch4jConfig>

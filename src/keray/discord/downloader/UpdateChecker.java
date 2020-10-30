@@ -22,15 +22,25 @@ public class UpdateChecker {
 		final ProgressWindow window = new ProgressWindow();
 		
 		window.progressBar.setIndeterminate(true);
+		
+		
+		File icon = new File("app.ico");
+		if(!icon.exists()) {
+			try(InputStream in = UpdateChecker.class.getResourceAsStream("/icon.ico"); OutputStream out = new FileOutputStream(icon);)
+			{
+				Utils.pipe(in, out);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 
 		try {
 			String releasesLocal = getLocalReleases();
 			
-			window.label.setText("Local version: " + releasesLocal);
+			window.label.setText("Checking update");
 			
 			String releasesRemote = getRemoteReleases();
 			
-			window.label.setText("Remote version: " + releasesRemote);
 			
 			var listener = new ProgressListener() {
 				public void setMax(int max) {
@@ -46,6 +56,8 @@ public class UpdateChecker {
 				window.label.setText("No update found");
 				System.out.println("No update found");
 				return;
+			} else {
+				
 			}
 			
 			if (releasesLocal == null || !releasesLocal.contentEquals(releasesRemote)) {
@@ -59,16 +71,19 @@ public class UpdateChecker {
 				
 				Utils.download(new URL(urlString), packageZip, listener);
 
-				window.label.setText("Installing update");
+				window.label.setText("Installing update...");
 				window.progressBar.setIndeterminate(true);
 				
 				install();
+				
+				window.label.setText("Done");
 				
 				Files.writeString(Path.of("releases.txt"), releasesRemote);
 			} else {
 				System.out.println("No update needed");
 			}
-			
+
+			window.label.setText("Starting Discord");
 			Runtime.getRuntime().exec("package\\Discord.exe");
 			System.exit(0);
 		} catch (Exception e) {
@@ -115,7 +130,7 @@ public class UpdateChecker {
 			}
 			
 			zip.close();
-			packageZip.delete();
+			//packageZip.delete();
 			
 		} catch (IOException e) {
 			e.printStackTrace();

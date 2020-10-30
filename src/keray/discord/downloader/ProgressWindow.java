@@ -29,7 +29,7 @@ public class ProgressWindow {
 		progressBar = new JProgressBar();
 		label = new JLabel("something went wrong");
 		
-		progressBar.setPreferredSize(new Dimension(500, 26));
+		progressBar.setPreferredSize(new Dimension(300, 30));
 
 		((JComponent)frame.getContentPane()).setBorder(new EmptyBorder(10, 10, 10, 10));
 		
